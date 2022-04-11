@@ -5,10 +5,13 @@ import java.util.Set;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
+import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+@Data
 @Document(collection = "users")
 public class User {
   @Id
@@ -26,6 +29,11 @@ public class User {
   @NotBlank
   @Size(max = 120)
   private String password;
+
+  private String resetToken;
+
+  private String validationToken;
+
 
   @DBRef
   private Set<Role> roles = new HashSet<>();
